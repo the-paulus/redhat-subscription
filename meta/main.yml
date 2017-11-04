@@ -9,7 +9,7 @@ galaxy_info:
   github_branch: master
 
   platforms:
-  - name: RedHat
+  - name: EL
     versions:
     - 7
 
