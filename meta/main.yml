@@ -14,9 +14,9 @@ galaxy_info:
     - 7
 
   galaxy_tags:
-  - RedHat
-  - Subscription
-  - Enterprise Linux
+  - redhat
+  - subscription
+  - management
+  - system
 
 dependencies: []
-  
