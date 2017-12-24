@@ -25,10 +25,16 @@ redhat_subscription_org_id:
 redhat_subscription_activationkey:
 ```
 
+To resume a subscription on a system specify the UUID in the following
+variable. This should be defined either in a file in the **host_vars**
+directory or in the inventory file.
+
+```yml
+redhat_subscription_client_id:
+```
+
 Optional variables:
 ```yml
-# Register the system even if it is already registered
-redhat_subscription_force_register: yes
 # List of repositories to use.
 redhat_subscription_repositories: []
 ```
