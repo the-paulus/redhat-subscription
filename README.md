@@ -30,13 +30,16 @@ variable. This should be defined either in a file in the **host_vars**
 directory or in the inventory file.
 
 ```yml
-redhat_subscription_client_id:
+redhat_subscription_consumer_id:
 ```
 
 Optional variables:
 ```yml
-# List of repositories to use.
+# List of repositories to enable.
 redhat_subscription_repositories: []
+
+# List of respositories to disable.
+redhat_subscription_repositories_disable: []
 ```
 
 **Repositories**

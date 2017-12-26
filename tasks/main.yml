@@ -16,9 +16,8 @@
   redhat_subscription:
     username: "{{ redhat_subscription_username }}"
     password: "{{ redhat_subscription_password }}"
-    client_id: "{{ redhat_subscription_client_id }}"
+    consumer_id: "{{ redhat_subscription_client_id }}"
     autosubscribe: yes
-    force_register: yes
   when: redhat_subscription_username is defined and redhat_subscription_password is defined and redhat_subscription_activationkey is not defined and subscription_status.rc == 1 and ( redhat_subscription_client_id is defined and redhat_subscription_client_id != "")
 
 
@@ -34,16 +33,19 @@
   redhat_subscription:
     org_id: "{{ redhat_subscription_org_id }}"
     activationkey: "{{ redhat_subscription_activationkey }}"
-    client_id: "{{ redhat_subscription_client_id }}"
+    consumer_id: "{{ redhat_subscription_client_id }}"
     autosubscribe: yes
-    force_register: yes
   when: redhat_subscription_username is not defined and redhat_subscription_password is not defined and redhat_subscription_activationkey is defined and subscription_status.rc == 1 and ( redhat_subscription_client_id is defined or redhat_subscription_client_id != "")
-
 
 - name: Enable Red Hat Repos
   shell: "subscription-manager repos --enable {{ item }}"
   with_items: "{{ redhat_subscription_repositories }}"
   when: redhat_subscription_repositories is defined
+
+- name: Disable Red Hat Repos
+  shell: "subscription-manager repos --disable {{ item }}"
+  with_items: "{{ redhat_subscription_repositories_disable }}"
+  when: redhat_subscription_repositories_disable is defined 
 
 - name: Update packages.
   yum:
