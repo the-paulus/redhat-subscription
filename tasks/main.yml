@@ -10,7 +10,12 @@
     password: "{{ redhat_subscription_password }}"
     autosubscribe: yes
     force_register: yes
-  when: redhat_subscription_username is defined and redhat_subscription_password is defined and redhat_subscription_activationkey is not defined and subscription_status.rc == 1 and ( redhat_subscription_client_id is not defined or redhat_subscription_client_id == "")
+  when:
+    redhat_subscription_username is defined and
+    redhat_subscription_password is defined and
+    redhat_subscription_activationkey is not defined and
+    subscription_status.rc == 1 and
+    ( redhat_subscription_client_id is not defined or redhat_subscription_client_id == "")
 
 - name: Subscribe using username and password using client id
   redhat_subscription:
@@ -18,8 +23,12 @@
     password: "{{ redhat_subscription_password }}"
     consumer_id: "{{ redhat_subscription_client_id }}"
     autosubscribe: yes
-  when: redhat_subscription_username is defined and redhat_subscription_password is defined and redhat_subscription_activationkey is not defined and subscription_status.rc == 1 and ( redhat_subscription_client_id is defined and redhat_subscription_client_id != "")
-
+  when:
+    redhat_subscription_username is defined and
+    redhat_subscription_password is defined and
+    redhat_subscription_activationkey is not defined and
+    subscription_status.rc == 1 and
+    ( redhat_subscription_client_id is defined and redhat_subscription_client_id != "")
 
 - name: Subscribe using activationkey
   redhat_subscription:
@@ -27,7 +36,12 @@
     activationkey: "{{ redhat_subscription_activationkey }}"
     autosubscribe: yes
     force_register: yes
-  when: redhat_subscription_username is not defined and redhat_subscription_password is not defined and redhat_subscription_activationkey is defined and subscription_status.rc == 1 and ( redhat_subscription_client_id is not defined or redhat_subscription_client_id == "")
+  when:
+    redhat_subscription_username is not defined and
+    redhat_subscription_password is not defined and
+    redhat_subscription_activationkey is defined and
+    subscription_status.rc == 1 and
+    ( redhat_subscription_client_id is not defined or redhat_subscription_client_id == "")
 
 - name: Subscribe using activationkey using client id
   redhat_subscription:
@@ -35,7 +49,12 @@
     activationkey: "{{ redhat_subscription_activationkey }}"
     consumer_id: "{{ redhat_subscription_client_id }}"
     autosubscribe: yes
-  when: redhat_subscription_username is not defined and redhat_subscription_password is not defined and redhat_subscription_activationkey is defined and subscription_status.rc == 1 and ( redhat_subscription_client_id is defined or redhat_subscription_client_id != "")
+  when:
+    redhat_subscription_username is not defined and
+    redhat_subscription_password is not defined and
+    redhat_subscription_activationkey is defined and
+    subscription_status.rc == 1 and
+    ( redhat_subscription_client_id is defined or redhat_subscription_client_id != "")
 
 - name: Enable Red Hat Repos
   shell: "subscription-manager repos --enable {{ item }}"
@@ -45,7 +64,7 @@
 - name: Disable Red Hat Repos
   shell: "subscription-manager repos --disable {{ item }}"
   with_items: "{{ redhat_subscription_repositories_disable }}"
-  when: redhat_subscription_repositories_disable is defined 
+  when: redhat_subscription_repositories_disable is defined
 
 - name: Update packages.
   yum:
