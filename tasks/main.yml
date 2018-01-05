@@ -44,8 +44,8 @@
 
 - name: Disable Red Hat Repos
   shell: "subscription-manager repos --disable {{ item }}"
-  with_items: "{{ redhat_subscription_repositories_disable }}"
-  when: redhat_subscription_repositories_disable is defined 
+  with_items: "{{ redhat_subscription_disable_repositories }}"
+  when: redhat_subscription_disable_repositories is defined 
 
 - name: Update packages.
   yum:
